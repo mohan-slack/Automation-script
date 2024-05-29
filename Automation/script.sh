@@ -7,12 +7,23 @@ cckm_jenkins_token () {
   echo '=== retrieving jenkins token ==='
   CCKM_TOKEN=${JENKINS_TOKEN}
   CCKM_USER=${JENKINS_USER}
+
+  if [[ -z "$CCKM_TOKEN" || -z "$CCKM_USER" ]]; then
+    echo "Error: JENKINS_USER and JENKINS_TOKEN must be set."
+    exit 1
+  fi
 }
 
 cckm_jenkins_run () {
   echo '=== running Jenkins job ==='
   CCKM_URL="http://localhost:8080/"
   
+  # Check if input file exists
+  if [[ ! -f "$input_file" ]]; then
+    echo "Error: Input file '$input_file' not found."
+    exit 1
+  fi
+
   # Use the generator function to read the file
   while IFS= read -r line
   do
@@ -21,7 +32,7 @@ cckm_jenkins_run () {
       # Split the line into parameters
       IFS=',' read -ra params <<< "$line"
 
-      # Construct the command to trigger the Jenkins job
+      # Construct the command to trigger the Jenkins job (Provided default/direct value for Job)
       cmd="${CCKM_URL}build?token=${CCKM_TOKEN}&job=blueprint-azure-state-tools&TYPE=${params[0]}&APP_REF=${params[1]}&BRANCH=${params[2]}&STATE_ADDRESS=${params[3]}&TO_STATE_ADDRESS=${params[4]}"
 
       # Trigger the Jenkins job and capture the return code
@@ -54,6 +65,10 @@ cckm_jenkins_run () {
         do
           JENKINS_JOB_STATUS=$(curl -sk "${CCKM_URL}/${i}/api/json" --user "${CCKM_USER}:${CCKM_TOKEN}" | jq '.result')
           echo "Jenkins job status: $JENKINS_JOB_STATUS"
+          if [ "$JENKINS_JOB_STATUS" == "\"FAILURE\"" ]; then
+            echo "Error: Jenkins job failed for the line: $line"
+            exit 1
+          fi
           let $((COUNTER++))
           sleep 5
         done
