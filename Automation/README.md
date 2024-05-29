@@ -50,13 +50,13 @@ NOTE: The script will then retrieve the Jenkins token, trigger the Jenkins jobs 
 
 ## Error Handling
 
-Environment Variables: The script checks if the JENKINS_USER and JENKINS_TOKEN environment variables are set. If not, it prints an error message and exits.
+1. **Environment Variables**: The script checks if the JENKINS_USER and JENKINS_TOKEN environment variables are set. If not, it prints an error message and exits.
 
-Input File Existence: The script checks if the input file specified in the input_file variable exists. If not, it prints an error message and exits.
+2. **Input File Existence**: The script checks if the input file specified in the input_file variable exists. If not, it prints an error message and exits.
 
-Job Execution: The script monitors the status of the Jenkins jobs it triggers. If a job fails, the script prints an error message along with the line from the input file for which the job has failed, and then it exits.
+3. **Job Execution**: The script monitors the status of the Jenkins jobs it triggers. If a job fails, the script prints an error message along with the line from the input file for which the job has failed, and then it exits.
 
-Secure Communication: Always use HTTPS for production Jenkins servers to ensure secure communication.
+4. **Secure Communication**: Always use HTTPS for production Jenkins servers to ensure secure communication.
 
 ## Feature Enhancements
 
