@@ -1,0 +1,14 @@
+state-mv,my_app,my_branch,my_state_address1,my_to_state_address1
+
+state-mv,my_app,my_branch,my_state_address2,my_to_state_address2
+
+state-mv,my_app,my_branch,my_state_address3,my_to_state_address3
+
+state-mv,my_app,my_branch,my_state_address4,my_to_state_address4
+
+state-mv,my_app,my_branch,my_state_address5,my_to_state_address5
+
+Example:
+state-mv,my_app,my_branch,my_state_address,my_to_state_address
+
+state-mv,x1puo8,upgrade/terraform0.13,module.virtual_machine_windows_hklife3kh5sb33d.azurerm_network_interface.instance[0],module.virtual_machine_windows_hklife3kh5sb33d.azurerm_network_interface.instance[\"eth0\"]
