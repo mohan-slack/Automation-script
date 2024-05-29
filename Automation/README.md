@@ -1,10 +1,11 @@
 ---
 Shell Scripting-README.md
 
-#Jenkins Job Trigger and Monitor Script
+# Jenkins Job Trigger and Monitor Script for blueprint-azure-state-tools
+
 This Bash script interacts with a Jenkins server to trigger and monitor jobs based on an input file.
 
-##Prerequisites
+## Prerequisites
 
 1. **Bash Shell**: This script is written in Bash, so you need a Unix-like environment to run it. If you’re on Windows, you can use WSL (Windows Subsystem for Linux) or Git Bash.
 
